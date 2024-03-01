@@ -22,6 +22,13 @@ class Controller {
       return error
     }
   }
+
+  async findByName(name) {
+      const data = await Guest.find({
+        name: name
+      })
+      return data
+  }
   
   async saveGuest(name, isChild) {
     try {

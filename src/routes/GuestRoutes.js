@@ -5,24 +5,33 @@ const router = express.Router()
 router.get('/listAll', async (req, res) => {
   try {
     const data = await GuestController.listAll()
-    res.json({
-    data: data
-  })
+    res.send(data)
 
   } catch (error) {
-    res.json({error: error})
-    res.sendStatus(500)  
+    res.send(error)
   }
 })
 
 router.get('/listNotChild', async (req, res) => {
   try {
     const data = await GuestController.listNotChild()
-    res.json({
-    data: data
-  })
+    res.send(data)
   } catch (error) {
     res.json({error: error})
+    res.sendStatus(500)
+  }
+})
+
+router.get('/name/:name', async (req, res) => {
+  try {
+    const { name } = req.params
+    const data = await GuestController.findByName(name)
+    res.render('confirm.ejs', {
+      name: data[0].name,
+      id: data[0]._id
+    })
+
+  } catch (error) {
     res.sendStatus(500)
   }
 })
@@ -30,24 +39,22 @@ router.get('/listNotChild', async (req, res) => {
 router.post('/saveGuest', async (req, res) => {
   try {
     const { name, isChild } = req.body
-    const data = await GuestController.saveGuest(name, isChild)
-    res.json({data: data})
+    await GuestController.saveGuest(name, isChild)
+    res.sendStatus(201)
 
   } catch (error) {
-    res.json({error: error})
-    res.sendStatus(201)
+    res.send(error)
   }
 })
 
 router.put('/confirm/:id', async (req, res) => {
   try {
     const id = req.params.id
-    const data = await GuestController.confirmPresence(id)
-    res.json({data: data})
+    await GuestController.confirmPresence(id)
+    res.sendStatus(204)
 
   } catch (error) {
-    res.json({error: error})
-    res.sendStatus(422)
+    res.send(error)
   }
 })
 
@@ -55,11 +62,10 @@ router.delete('/delete/:id', async (req, res) => {
   try {
     const id = req.params.id
     await GuestController.deleteGuest(id)
-    res.sendStatus(200)
+    res.sendStatus(204)
 
   } catch (error) {
-    res.json({error: error})
-    res.sendStatus(422)
+    res.send(error)
   }
 })
 
