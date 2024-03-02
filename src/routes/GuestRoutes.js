@@ -51,10 +51,14 @@ router.put('/confirm/:id', async (req, res) => {
   try {
     const id = req.params.id
     await GuestController.confirmPresence(id)
-    res.sendStatus(204)
+      .then(res.status(204))
 
   } catch (error) {
-    res.send(error)
+    if(String(error) == 'Guest already confirmed') {
+      res.status(422).send()
+    } else {
+      res.status(500)
+    } 
   }
 })
 

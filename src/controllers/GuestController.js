@@ -49,7 +49,6 @@ class Controller {
   }
   
   async confirmPresence(id) {
-    try {
       const verification = await Guest.findById(id)
       if(verification.confirm) {
         throw 'Guest already confirmed'
@@ -59,10 +58,6 @@ class Controller {
         confirm: true
       })
       return data
-  
-    } catch (error) {
-      return error
-    }
   }
 
   async deleteGuest(id) {
