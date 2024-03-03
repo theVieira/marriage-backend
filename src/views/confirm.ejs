@@ -6,23 +6,23 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
   <title>Confirme sua Presença</title>
   <style>
     * {
-      font-family: "Dancing Script";
-      font-size: 115%;
+      font-family: "Tangerine";
+      font-size: 170%;
     }
   </style>
 </head>
 <body data-bs-theme="light" class="d-flex flex-column align-items-center justify-content-center" style="background: #faf6e6; height: 100vh;">
-  <div class="d-flex flex-column w-100 p-3 align-items-center h-100 justify-content-betwen">
-    <h2 class="text-wrap text-center fs-1 pt-5 lh-1 mt-4">Olá <strong><%= name %></strong>, seja bem vindo(a) a nossa área de confirmação! <br><br>Para confirmar sua presença em nosso casamento no dia <span class="fs-4">00/00/0000</span> às <span class="fs-4">00:00</span> horas basta clicar em</h3>
+  <div class="d-flex flex-column w-100 align-items-center px-3">
+    <h2 class="text-wrap text-center fs-1 lh-1" style="max-width: 20rem;">Olá <strong class="fs-1 fw-bold"><%= name %></strong>, seja bem vindo(a) a nossa <strong class="fs-1">área de confirmação!</strong> <br><br>Para confirmar sua presença em nosso casamento no dia <span class="fs-1 fw-bold">00/00/0000</span> às <span class="fs-1 fw-bold">00:00</span> horas basta clicar em</h3>
       <input type="button" value="Confirmar" class="btn btn-dark fs-2 rounded border-0 p-2 m-3" id="confirm">
       <div id="response" class="text-center text-light rounded"></div>
       <span id="id" class="d-none"><%= id %></span>
+      <h1 class="pt-2 " style="z-index: -10;">Gabriel & Geniquelly</h1>
     </div>
-    <h1 class="pt-2 position-absolute bottom-0 mb-3">Gabriel & Geni</h1>
 
   <script>
     const id = document.querySelector('#id').textContent
@@ -41,7 +41,7 @@
         response.classList.add('bg-danger', 'p-2', 'fs-6', 'border-2', 'mt-2')
         response.textContent = 'Ops!, houve algum erro na comunicação com o servidor'
       } else if(res.status == 422) {
-        response.classList.add('bg-warning', 'p-2', 'fs-6', 'border-2', 'text-dark', 'fw-bold', 'mt-2')
+        response.classList.add('bg-warning', 'p-2', 'fs-5', 'border-2', 'text-dark', 'fw-bold', 'mt-2')
         response.textContent = 'Hey! parece que sua presença já esta confirmada, estamos te aguardando!'
         button.style.display = 'none'
       }
