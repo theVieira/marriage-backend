@@ -43,21 +43,21 @@ router.post('/saveGuest', async (req, res) => {
     res.sendStatus(201)
 
   } catch (error) {
-    res.send(error)
+    res.sendStatus(422).json({error: error})
   }
 })
 
 router.put('/confirm/:id', async (req, res) => {
   try {
     const id = req.params.id
-    await GuestController.confirmPresence(id)
-      .then(res.status(204))
+    const data = await GuestController.confirmPresence(id)
+    res.sendStatus(204)
 
   } catch (error) {
     if(String(error) == 'Guest already confirmed') {
-      res.status(422).send()
+      res.sendStatus(422)
     } else {
-      res.status(500)
+      res.sendStatus(500)
     } 
   }
 })
